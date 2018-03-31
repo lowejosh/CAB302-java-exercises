@@ -1,14 +1,14 @@
 package oop.PizzaModified;
 
-public class Pizza {
+public class PizzaModified {
 	// Private properties
 	private int price;
 	private String type;
 
 	// Constructs a Pizza object with a price and a type
-	public Pizza(int price, String type) {
-		this.price = price;
-		this.type = type;
+	public PizzaModified(PizzaType type) {
+		this.price = type.price();
+		this.type = type.toString();
 	}
 
 	// Gets the price of the pizza
