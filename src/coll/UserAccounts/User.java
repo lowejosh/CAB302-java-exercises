@@ -1,7 +1,13 @@
 package coll.UserAccounts;
 
+import java.util.ArrayList;
+
 public class User {
 
+	String username;
+	String password;
+	public static ArrayList<String> usernames = new ArrayList();
+	
 	/**
 	 * Constructs a user with a given username and password. If a user is
 	 * successfully constructed, their username is added to the list of usernames.
@@ -14,7 +20,12 @@ public class User {
 	 *             with this).
 	 */
 	public User(String username, String password) throws Exception {
-
+		if (badUsername(username) || badPassword(password)) {
+			throw new UserException();
+		} else {
+			this.username = username;
+			this.password = password;
+		}
 	}
 
 	/**
@@ -23,7 +34,7 @@ public class User {
 	 * @return
 	 */
 	public String getUsername() {
-		return null;
+		return username;
 	}
 
 	/**
@@ -32,7 +43,7 @@ public class User {
 	 * @return
 	 */
 	public String getPassword() {
-		return null;
+		return password;
 	}
 
 	/**
@@ -42,7 +53,11 @@ public class User {
 	 * @return true if the username already exist, false otherwise.
 	 */
 	public static boolean badUsername(String username) {
-		return false;
+		if (usernames.contains(username)) { 
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -53,7 +68,11 @@ public class User {
 	 *         otherwise.
 	 */
 	public static boolean badPassword(String password) {
-		return false;
+		if (password.length() < 8) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

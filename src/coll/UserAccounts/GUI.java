@@ -16,6 +16,13 @@ public class GUI {
 	 * @param amount. The amount of money to be transferred in $.
 	 */
 	public static void transfer(User user, BankAccount b1, BankAccount b2, double amount) {
+		try {
+			b1.withdraw(user, amount);
+			b2.deposit(amount);
+		} catch (UserException e) {
 
+		} catch (FundsException e) {
+
+		}
 	}
 }

@@ -8,12 +8,19 @@ public class EnrollmentManager {
 
 	/**
 	 * Enrolls a student into a unit.
-	 * 
+	 *
 	 * @param unit
 	 * @param student
 	 */
 	public static void enroll(String unit, String student) {
-		
+		Set<String> set;
+		if (enrollments.containsKey(unit)) {
+			set = enrollments.get(unit);
+		} else {
+			set = new HashSet<>();
+		}
+		set.add(student);
+		enrollments.put(unit, set);
 	}
 
 	/**
@@ -22,14 +29,14 @@ public class EnrollmentManager {
 	 * @return
 	 */
 	public static HashMap<String, Set<String>> getEnrollments() {
-		return null;
+		return enrollments;
 	}
 
 	/**
 	 * Removes all enrollments form the HashMap.
 	 */
 	public static void wipeEnrollments() {
-		
+		enrollments.clear();
 	}
 
 	/**
@@ -39,7 +46,9 @@ public class EnrollmentManager {
 	 * @param student
 	 */
 	public static void withdrawEnrollment(String unit, String student) {
-		
+		Set<String> set = enrollments.get(unit);
+		set.remove(student);
+		enrollments.put(unit, set);
 	}
 
 	/**
@@ -48,7 +57,13 @@ public class EnrollmentManager {
 	 * @param student
 	 */
 	public static void withdrawStudent(String student) {
-
+       for (String unit : enrollments.keySet()) {
+           if (enrollments.get(unit).contains(student)){
+               Set<String> set = enrollments.get(unit);
+               set.remove(student); 
+               enrollments.put(unit, set);
+           }
+       }
 	}
 
 	/**
@@ -61,6 +76,12 @@ public class EnrollmentManager {
 	 * @return
 	 */
 	public static Set<String> getStudents(String discipline) {
-		return null;
+		Set<String> set = new HashSet<>();
+		for (String unit : enrollments.keySet()) {
+			if (unit.startsWith(discipline)) {
+				set.addAll(enrollments.get(unit));
+			}
+		}
+		return set;
 	}
 }

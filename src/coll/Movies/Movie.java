@@ -1,5 +1,6 @@
 package coll.Movies;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Movie {
@@ -13,7 +14,9 @@ public class Movie {
 	 * @param year
 	 */
 	public Movie(String title, int year) {
-		
+		ratings = new ArrayList<Integer>();
+		this.title = title;
+		this.year = year;
 	}
 
 	/**
@@ -21,7 +24,7 @@ public class Movie {
 	 * @param rating
 	 */
 	public void addRating(int rating) {
-
+		ratings.add(rating);
 	}
 
 	/** 
@@ -29,7 +32,7 @@ public class Movie {
 	 * @return the title of the movie as a String.
 	 */
 	public String title() {
-		return null;
+		return title;
 	}
 
 	/** 
@@ -37,7 +40,7 @@ public class Movie {
 	 * @return the year of the movie as an int.
 	 */
 	public int year() {
-		return 0;
+		return year;
 	}
 
 	/** 
@@ -45,7 +48,10 @@ public class Movie {
 	 * @return the average rating of the movie as a double.
 	 */
 	public double rating() {
-		return 0;
+		double sum = 0;
+		for (int i = 0; i < ratings.size(); i++) {
+			sum+=ratings.get(i);
+		}
+		return sum / ratings.size();
 	}
-
 }
